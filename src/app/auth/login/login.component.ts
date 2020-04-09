@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators} from '@angular/forms';
 import { AuthService } from 'src/app/sevices/auth.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
@@ -9,7 +9,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit , OnDestroy{
 
   form: FormGroup
   aSub : Subscription
@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
   onSubmit(){
     this.form.disable()
     this.aSub= this.auth.login(this.form.value).subscribe(
-      ()=>this.router.navigate(['/overview']),
+      ()=>this.router.navigate(['/transactions']),
       error => {
         //MaterialService.toast(error.error)
         console.warn(error)

@@ -4,24 +4,56 @@
   </mat-toolbar>
   <mat-card>
     <mat-card-content >
-        <form class="my-form">
+        <form class="my-form" [formGroup] = "form" (ngSubmit)="onSubmit()">
            <mat-form-field class="full-width">
                   <mat-label>Full Name</mat-label>
-                  <input  matInput  placeholder="Full name"  name="fname"  required>
+                  <input  
+                     matInput  
+                     formControlName = "username"
+                     id="username" 
+                     type="text"
+                     [ngClass] = "{'invalid': form.get('username').invalid && form.get('username').touched}"
+                     placeholder="Full name"  
+                  >
                </mat-form-field>
                <mat-form-field class="full-width">
                   <mat-label>Email</mat-label>
-                  <input  matInput  placeholder="Email" name="email" required>
+                  <input  
+                     matInput  
+                     placeholder="Email" 
+                     formControlName = "email"
+                     id="email" 
+                     type="email"
+                     [ngClass] = "{'invalid': form.get('email').invalid && form.get('email').touched}"
+                  >
                </mat-form-field>
                <mat-form-field class="full-width">
                   <mat-label>Password</mat-label>
-                  <input  matInput  placeholder="Password"  name="password" required>
+                  <input
+                     matInput  
+                     placeholder="Password"  
+                     formControlName = "password"
+                     id="password"
+                     type="password" 
+                     [ngClass] = "{'invalid': form.get('password').invalid && form.get('password').touched}"
+                  >
                </mat-form-field>
+
+               <mat-card-actions>
+                  <button 
+                     mat-raised-button 
+                     color="primary"
+                     type = "submit" 
+                     class="modal-action btn waves-effect"
+                     [disabled] = "form.invalid || form.disabled"
+                  >
+                  REGISTER</button>
+               </mat-card-actions>
         </form>
       </mat-card-content>
-     <mat-card-actions>
-        <!-- <button mat-raised-button (click)="register()" color="primary">REGISTER</button> -->
-     </mat-card-actions>
+     <!-- <mat-card-actions>
+        <button mat-raised-button (click)="register()" color="primary">REGISTER</button> 
+     </mat-card-actions> -->
   </mat-card>
 </div>  
 

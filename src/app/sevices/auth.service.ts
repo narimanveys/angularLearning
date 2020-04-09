@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { User } from '../shared/interfaces';
+import { User, RegisterUser } from '../shared/interfaces';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import {tap} from 'rxjs/operators';
@@ -23,7 +23,21 @@ export class AuthService{
                         var bearer = new String("Bearer ")
                         localStorage.setItem('auth-token',bearer.concat(id_token))
                         this.setToken(bearer.concat(id_token))
-                        //this.userInfoService.handleUserAuthorize()
+                        this.userInfoService.handleUserAuthorize()
+                    }
+                )
+            )
+    }
+
+    register(registerUser: RegisterUser): Observable<{id_token: string}>{
+        return this.http.post<{id_token: string}>('http://193.124.114.46:3001/users', registerUser)
+            .pipe(
+                tap( 
+                    ({id_token})=>{
+                        var bearer = new String("Bearer ")
+                        localStorage.setItem('auth-token',bearer.concat(id_token))
+                        this.setToken(bearer.concat(id_token))
+                        this.userInfoService.handleUserAuthorize()
                     }
                 )
             )

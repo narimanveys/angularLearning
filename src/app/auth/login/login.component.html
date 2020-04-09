@@ -4,7 +4,7 @@
   </mat-toolbar>
   <mat-card class="my-card">
      <mat-card-content>
-        <form class="my-form" [formGroup]="form" (ngSubmit)="onSubmit()" >
+        <form class="my-form" [formGroup] = "form" (ngSubmit)="onSubmit()">
            <mat-form-field class="full-width">
               <mat-label>Email</mat-label>
               <input  matInput formControlName = "email"
@@ -17,10 +17,16 @@
               id="password"
               type="password" placeholder="Password" name="password">
            </mat-form-field>
+           <mat-card-actions>
+            <button mat-raised-button 
+            type = "submit" 
+            [disabled] = "form.invalid || form.disabled">LOGIN</button>
+         </mat-card-actions>
         </form>
      </mat-card-content>
-     <mat-card-actions>
-        <button mat-raised-button type = "submit" 
+     <!-- <mat-card-actions>
+        <button mat-raised-button 
+        type = "submit" 
         [disabled] = "form.invalid || form.disabled">LOGIN</button>
-     </mat-card-actions>
+     </mat-card-actions> -->
   </mat-card>

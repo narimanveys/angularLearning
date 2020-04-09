@@ -7,18 +7,19 @@ import { TransactionsComponent } from './transactions/transactions/transactions.
 import { AppComponent } from './app.component'
 
 const routes: Routes = [
-    { path: 'login', component: LoginComponent}
-    // {path: '', component: AppComponent, children: [
-    //     // {path: '',redirectTo: '/login', pathMatch: 'full'},
-    //     { path: 'register', component: RegistrationComponent, pathMatch: 'full'},
-    //     { path: 'login', component: LoginComponent}
-    // ]},
-    // {path:'transactions', component: TransactionsComponent, pathMatch: 'full'}
+    
+    {path: '', component: HeaderComponent, children: [
+        {path: '',redirectTo: '/login', pathMatch: 'full'},
+        { path: 'register', component: RegistrationComponent, pathMatch: 'full'},
+        { path: 'login', component: LoginComponent}
+    ]},
+    {path:'transactions', component: TransactionsComponent, pathMatch: 'full'}
 ]
 
 @NgModule({
     imports:[
-        RouterModule.forRoot(routes,{enableTracing: true})
+        // RouterModule.forRoot(routes,{enableTracing: true})
+        RouterModule.forRoot(routes)
     ],
     exports:[
         RouterModule
