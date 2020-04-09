@@ -20,13 +20,16 @@ import { MatInputModule } from '@angular/material/input';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatListModule} from '@angular/material/list';
 import { HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
+import { SiteheaderComponent } from './layouts/siteheader/siteheader.component';
+import { TokenInterceptor } from './shared/classes/token.interceptor';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegistrationComponent,
-    HeaderComponent
+    HeaderComponent,
+    SiteheaderComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +50,13 @@ import { HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      multi: true,
+      useClass: TokenInterceptor
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
