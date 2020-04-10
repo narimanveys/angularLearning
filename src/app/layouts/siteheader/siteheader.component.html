@@ -1,12 +1,12 @@
 <mat-toolbar color="primary">
     <mat-toolbar-row>
       
-        <h1>User Name: Test; User Balance: 500$</h1>
+        <h1><b>Name:</b> {{userInfo?.name}}     <b>Balance:</b> {{userInfo?.balance}}$</h1>
     
        <span class="spacer"></span>
        <a mat-button routerLink="/transactions">Transactions</a>
        <a mat-button routerLink="/create">New Transaction</a>
-       <a mat-button routerLink="/login">Log Out</a>
+       <a mat-button (click)="logout($event)">Log Out</a>
     </mat-toolbar-row>
   </mat-toolbar>
   
