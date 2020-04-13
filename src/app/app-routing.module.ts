@@ -4,9 +4,9 @@ import { RegistrationComponent } from './auth/registration/registration.componen
 import { LoginComponent } from './auth/login/login.component'
 import { HeaderComponent } from './layouts/header/header.component'
 import { TransactionsComponent } from './transactions/transactions/transactions.component'
-import { AppComponent } from './app.component'
 import { SiteheaderComponent } from './layouts/siteheader/siteheader.component'
 import { AuthGuard } from './shared/classes/auth.guard'
+import { CreatetransactionComponent } from './transactions/createtransaction/createtransaction.component'
 
 const routes: Routes = [
     
@@ -18,7 +18,7 @@ const routes: Routes = [
     {path: '', component: SiteheaderComponent, canActivate:[AuthGuard], children: [
         // {path: '',redirectTo: '/transactions', pathMatch: 'full'},
         {path:'transactions', component: TransactionsComponent, pathMatch: 'full'},
-        {path:'create', component: TransactionsComponent, pathMatch: 'full'}
+        {path:'create', component: CreatetransactionComponent, pathMatch: 'full'}
     ]}
 ]
 
