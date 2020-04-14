@@ -1,1 +1,41 @@
-<p>createtransaction works!</p>
+<mat-toolbar>
+    <span>New Transaction</span>
+  </mat-toolbar>
+  <mat-card class="my-card">
+     <mat-card-content>
+        <form class="my-form" [formGroup] = "form" (ngSubmit)="onSubmit()">
+            <!-- <form class="my-form" [formGroup] = "form"> -->
+            <mat-form-field class="full-width">
+                <mat-label>User Name</mat-label>
+                <input type="text" class = "user-input" matInput formControlName ="name" [matAutocomplete]="auto">
+                <mat-autocomplete #auto="matAutocomplete">
+                  <mat-option *ngFor="let option of searchedUsersList$ | async" [value]="option.name">
+                    {{option.name}}
+                  </mat-option>
+                </mat-autocomplete>
+                <span *ngIf="form.get('name').invalid && form.get('name').touched">
+                    <mat-error *ngIf="form.get('name').errors?.required">User can't be empty</mat-error>
+                </span>
+            </mat-form-field>
+            <mat-form-field class="full-width" >
+              <mat-label>Amount</mat-label>
+              <input  matInput formControlName="amount"
+              id="amount"
+              type="number" placeholder="Amount" name="amount">
+              <mat-error *ngIf="form.get('amount').errors?.required">Amount can't be empty</mat-error>
+              <mat-error *ngIf="form.get('amount').errors?.max">
+                  You don't have enought money 
+              </mat-error> 
+              <mat-error *ngIf="form.get('amount').errors?.min">
+                Amount shoul greater than 10 cents :) 
+            </mat-error> 
+           </mat-form-field>
+           {{ form.get('amount').errors | json }}
+           <mat-card-actions>
+            <button mat-raised-button 
+            type = "submit" 
+            [disabled] = "form.invalid || form.disabled">LOGIN</button>
+         </mat-card-actions>
+        </form>
+     </mat-card-content>
+  </mat-card>

@@ -25,7 +25,8 @@ import { TokenInterceptor } from './shared/classes/token.interceptor';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { TransactionsComponent } from './transactions/transactions/transactions.component';
-
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { CreatetransactionComponent } from './transactions/createtransaction/createtransaction.component';
 //import { TransactionsService } from './transactions/transaction.service';
 
 @NgModule({
@@ -35,7 +36,8 @@ import { TransactionsComponent } from './transactions/transactions/transactions.
     RegistrationComponent,
     HeaderComponent,
     SiteheaderComponent,
-    TransactionsComponent
+    TransactionsComponent,
+    CreatetransactionComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +59,7 @@ import { TransactionsComponent } from './transactions/transactions/transactions.
     HttpClientModule,
     MatTableModule,
     MatSortModule,
-    //TransactionsService
+    MatAutocompleteModule
   ],
   providers: [
     {

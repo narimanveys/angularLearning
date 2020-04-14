@@ -32,3 +32,21 @@ export interface Transaction{
     amount: number
     balance: number
 }
+
+export interface SearchUser{
+    id: number
+    name: string
+}
+
+export interface NewTransaction{
+    name: string
+    amount: number
+}
+
+export interface TransactionCreationResult{
+    id: number
+    date: Date
+    username: string
+    amount: number
+    balance: number
+}
