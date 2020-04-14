@@ -1,1 +1,22 @@
-<p>transactions works!</p>
+<div>
+    <mat-table [dataSource]="dataSource" >
+        <ng-container matColumnDef="username">
+            <mat-header-cell *matHeaderCellDef>User Name</mat-header-cell>
+            <mat-cell *matCellDef="let transaction">{{transaction.username}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="date">
+            <mat-header-cell *matHeaderCellDef>Date</mat-header-cell>
+            <mat-cell *matCellDef="let transaction">{{transaction.date}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="amount">
+            <mat-header-cell *matHeaderCellDef>Amount</mat-header-cell>
+            <mat-cell *matCellDef="let transaction">{{transaction.amount}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="balance">
+            <mat-header-cell *matHeaderCellDef>Balance</mat-header-cell>
+            <mat-cell *matCellDef="let transaction">{{transaction.balance}}</mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns" color="primary"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    </mat-table>
+</div>
