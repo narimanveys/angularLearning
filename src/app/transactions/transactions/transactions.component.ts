@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 //import { Observable } from 'rxjs';
 //import { Transaction } from 'src/app/shared/interfaces';
 import { TransactionsService } from '../transaction.service';
 import { MatTableDataSource,MatTableModule} from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
 
 
 
@@ -12,7 +13,7 @@ import { MatTableDataSource,MatTableModule} from '@angular/material/table';
   styleUrls: ['./transactions.component.scss']
 })
 export class TransactionsComponent implements OnInit {
- MatTable: any
+  @ViewChild(MatSort) sort: MatSort;
   //transactions$: Observable<Transaction[]>
   // date: Date
   // username: string
@@ -28,6 +29,7 @@ export class TransactionsComponent implements OnInit {
         return;
       }
       this.dataSource= new MatTableDataSource(results)
+      this.dataSource.sort=this.sort;
     })
     //this.transactions$= this.transactionService.fetch()
   }
