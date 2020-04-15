@@ -4,6 +4,13 @@
   </mat-toolbar>
   <mat-card class="my-card">
      <mat-card-content>
+      <div *ngIf="errorMessage" class="registration__error">
+         <mat-divider></mat-divider>
+         <div class="registration__error-label">
+           {{ errorMessage }}
+         </div>
+         <mat-divider></mat-divider>
+       </div>
         <form class="my-form" [formGroup] = "form" (ngSubmit)="onSubmit()">
            <mat-form-field class="full-width">
               <mat-label>Email</mat-label>

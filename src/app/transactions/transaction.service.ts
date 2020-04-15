@@ -20,7 +20,8 @@ export class TransactionsService {
     }
 
     getUserList(filter: string) {
-        return this.http.post<SearchUser[]>('http://193.124.114.46:3001/api/protected/users/list', {filter}).pipe(catchError(()=> of([])))
+        return this.http.post<SearchUser[]>('http://193.124.114.46:3001/api/protected/users/list', {filter})
+        //return this.http.post<SearchUser[]>('http://193.124.114.46:3001/api/protected/users/list', {filter}).pipe(catchError(()=> of([])))
     }
 
     postTransaction(newTransaction: NewTransaction){
