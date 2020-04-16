@@ -12,6 +12,7 @@ import { Subscription } from 'rxjs';
 export class RegistrationComponent implements OnInit, OnDestroy {
   form: FormGroup;
   aSub: Subscription;
+  errorMessage: string;
 
   constructor(private auth: AuthService,
               private router: Router) { }
@@ -31,12 +32,13 @@ export class RegistrationComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(){
+    this.errorMessage = '';
     this.form.disable();
     this.aSub = this.auth.register(this.form.value).subscribe(
       () => this.router.navigate(['/transactions']),
       error => {
-        // MaterialService.toast(error.error)
-        console.warn(error);
+        this.errorMessage = error.error;
+        console.warn(error.error);
         this.form.enable();
       }
     );

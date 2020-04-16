@@ -27,7 +27,6 @@ import { MatSortModule } from '@angular/material/sort';
 import { TransactionsComponent } from './transactions/transactions/transactions.component';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { CreatetransactionComponent } from './transactions/createtransaction/createtransaction.component';
-// import { TransactionsService } from './transactions/transaction.service';
 
 @NgModule({
   declarations: [

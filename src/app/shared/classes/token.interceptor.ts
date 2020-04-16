@@ -10,17 +10,17 @@ export class TokenInterceptor implements HttpInterceptor{
     constructor(private auth: AuthService, private router: Router){
     }
 
-    intercept(request: HttpRequest<any>, next: HttpHandler):Observable<HttpEvent<any>>{
-        console.log('intercept', this.auth.getToken())
-        if(this.auth.isAuthenticated()){
-            request=request.clone({
-                setHeaders:{
+    intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>>{
+        console.log('intercept', this.auth.getToken());
+        if (this.auth.isAuthenticated()){
+            request = request.clone({
+                setHeaders: {
                     Authorization: this.auth.getToken()
                 }
-            })
+            });
         }
 
-        return next.handle(request)
+        return next.handle(request);
         // return next.handle(request).pipe(
         //     catchError(
         //         (error: HttpErrorResponse)=> this.handleAuthError(error )
@@ -31,7 +31,7 @@ export class TokenInterceptor implements HttpInterceptor{
     // private handleAuthError(error: HttpErrorResponse): Observable<any>{
     //     console.log('interceptor', error)
     //     if(error.status == 401){
-    //         this.router.navigate(['/login'], 
+    //         this.router.navigate(['/login'],
     //         {queryParams:{
     //             sessionFailed: true
     //         }

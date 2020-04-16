@@ -17,12 +17,24 @@
               <input  matInput formControlName = "email"
               id="email" 
               type="email" placeholder="Email" name="email">
+              <mat-error *ngIf="form.get('email').errors?.required">
+               Email is required
+              </mat-error>
+              <mat-error *ngIf="form.get('email').errors?.email">
+               Email address is not correct
+              </mat-error>
            </mat-form-field>
            <mat-form-field class="full-width">
               <mat-label>Password</mat-label>
               <input  matInput formControlName="password"
               id="password"
               type="password" placeholder="Password" name="password">
+              <mat-error *ngIf="form.get('password').errors?.required">
+                 Password can't be empty
+               </mat-error>
+               <mat-error *ngIf="form.get('password').errors?.minlength && form.get('password').errors['minlength']['requiredLength']">
+                    Password length isn't correct(min acceptable length: {{form.get('password').errors['minlength']['requiredLength']}})
+               </mat-error>
            </mat-form-field>
            <mat-card-actions>
             <button mat-raised-button 

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from './sevices/auth.service';
 
 @Component({
@@ -6,15 +6,16 @@ import { AuthService } from './sevices/auth.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   constructor(private auth: AuthService){
   }
   title = 'PWTestApp';
-  ngOnInit(){
-    const potentialToken = localStorage.getItem('auth-token')
 
-    if(potentialToken !==null){
-      this.auth.setToken(potentialToken)
+  ngOnInit(){
+    const potentialToken = localStorage.getItem('auth-token');
+
+    if (potentialToken !== null){
+      this.auth.setToken(potentialToken);
     }
   }
 }

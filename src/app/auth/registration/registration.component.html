@@ -4,39 +4,51 @@
   </mat-toolbar>
   <mat-card>
     <mat-card-content >
+      <div *ngIf="errorMessage" class="registration__error">
+         <mat-divider></mat-divider>
+         <div class="registration__error-label">
+           {{ errorMessage }}
+         </div>
+         <mat-divider></mat-divider>
+       </div>
         <form class="my-form" [formGroup] = "form" (ngSubmit)="onSubmit()">
            <mat-form-field class="full-width">
                   <mat-label>Full Name</mat-label>
                   <input  
-                     matInput  
-                     formControlName = "username"
-                     id="username" 
-                     type="text"
-                     [ngClass] = "{'invalid': form.get('username').invalid && form.get('username').touched}"
-                     placeholder="Full name"  
-                  >
-               </mat-form-field>
+                     matInput
+                     formControlName="username"
+                  />
+                  <mat-error *ngIf="form.get('username').errors?.required">
+                     User name can't be empty
+                  </mat-error>
+            </mat-form-field>
                <mat-form-field class="full-width">
                   <mat-label>Email</mat-label>
                   <input  
-                     matInput  
-                     placeholder="Email" 
-                     formControlName = "email"
-                     id="email" 
-                     type="email"
-                     [ngClass] = "{'invalid': form.get('email').invalid && form.get('email').touched}"
-                  >
+                     matInput 
+                     type="email" 
+                     formControlName="email"
+                  />
+                  <mat-error *ngIf="form.get('email').errors?.required">
+                     Email is required
+                  </mat-error>
+                  <mat-error *ngIf="form.get('email').errors?.email">
+                     Email address is not correct
+                  </mat-error>
                </mat-form-field>
                <mat-form-field class="full-width">
                   <mat-label>Password</mat-label>
                   <input
                      matInput  
-                     placeholder="Password"  
                      formControlName = "password"
-                     id="password"
                      type="password" 
-                     [ngClass] = "{'invalid': form.get('password').invalid && form.get('password').touched}"
-                  >
+                  />
+                  <mat-error *ngIf="form.get('password').errors?.required">
+                     Password can't be empty
+                  </mat-error>
+                  <mat-error *ngIf="form.get('password').errors?.minlength && form.get('password').errors['minlength']['requiredLength']">
+                     Password length isn't correct(min acceptable length: {{form.get('password').errors['minlength']['requiredLength']}})
+                  </mat-error>
                </mat-form-field>
 
                <mat-card-actions>
