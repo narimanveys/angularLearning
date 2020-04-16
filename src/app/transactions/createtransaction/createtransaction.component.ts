@@ -5,7 +5,8 @@ import { map, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operato
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { SearchUser } from 'src/app/shared/interfaces';
 import { LoggedUserInfoService } from 'src/app/sevices/loggeduserinfo.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-createtransaction',
@@ -13,7 +14,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./createtransaction.component.scss']
 })
 export class CreatetransactionComponent implements OnInit {
-
+  errorMessage: string;
   userSearchControl: FormControl;
   form: FormGroup = new FormGroup({
     name: new FormControl(
@@ -30,7 +31,7 @@ export class CreatetransactionComponent implements OnInit {
 
   searchedUsersList$: Observable<SearchUser[]> = this.form.valueChanges.pipe(
     map(form => form.name),
-    // останавливает дальнейшее прокидование обсервабла
+    // останавливает дальнейшее прокидование Observable
     debounceTime(500),
     // прокидывает только если значение отличается от старого
     distinctUntilChanged(),
@@ -39,16 +40,24 @@ export class CreatetransactionComponent implements OnInit {
   );
 
   constructor(private transactionService: TransactionsService, private loggedUserInfoService: LoggedUserInfoService,
-              private activatedRoute: ActivatedRoute) {
-    console.log('FROM CONSTRUCTOR');
+              private activatedRoute: ActivatedRoute, private router: Router) {
+    console.log('FROM constructor');
     console.log(this.activatedRoute.snapshot.queryParams.name);
   }
 
   onSubmit() {
     this.form.disable();
-    this.transactionService.postTransaction(this.form.value).subscribe();
-    console.log('FROM');
-    console.log(this.activatedRoute.snapshot.queryParams.name);
+    this.errorMessage = '';
+    this.transactionService.postTransaction(this.form.value).subscribe(
+      () => this.router.navigate(['/transactions']),
+      (error: HttpErrorResponse) => {
+        this.errorMessage = error.error;
+        console.warn(error.error);
+        this.form.enable();
+        console.log('FROM Submit');
+        console.log(this.activatedRoute.snapshot.queryParams.name);
+      }
+    );
   }
 
   ngOnInit(): void {
