@@ -11,17 +11,17 @@ import { Router } from '@angular/router';
 })
 export class SiteheaderComponent implements OnInit {
   userInfo: UserInfo ;
-  constructor(private userInfoService: LoggedUserInfoService, private auth: AuthService,private router: Router) { }
+  constructor(private userInfoService: LoggedUserInfoService, private auth: AuthService, private router: Router) { }
 
   ngOnInit(): void {
-    this.userInfoService.userInfoSubject.subscribe(user=>{
-      this.userInfo = user
-    })
+    this.userInfoService.userInfoSubject.subscribe(user => {
+      this.userInfo = user;
+    });
   }
 
   logout(event: Event){
-    event.preventDefault()
-    this.auth.logout()
-    this.router.navigate(['/login'])
+    event.preventDefault();
+    this.auth.logout();
+    this.router.navigate(['/login']);
   }
 }

@@ -12,45 +12,45 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class LoginComponent implements OnInit , OnDestroy{
 
-  form: FormGroup
-  aSub : Subscription
-  errorMessage: string
+  form: FormGroup;
+  aSub: Subscription;
+  errorMessage: string;
   constructor(private auth: AuthService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.form= new FormGroup({
-      email: new FormControl(null,[Validators.required, Validators.email]),
-      password: new FormControl(null,[Validators.required, Validators.minLength(6)])
-    })
+    this.form = new FormGroup({
+      email: new FormControl(null, [Validators.required, Validators.email]),
+      password: new FormControl(null, [Validators.required, Validators.minLength(6)])
+    });
 
-    this.route.queryParams.subscribe((params: Params)=> {
+    this.route.queryParams.subscribe((params: Params) => {
       this.errorMessage = '';
-      if(params['registered']){
-        console.log('You will be redirected to main page as authorized user')
-      } else if(params['accessDenied']){
-        console.log('Please authorize in system')
-      }else if(params['sessionFiled']){
-        console.log('Please enter the system again, your session expired')
+      if (params.registered){
+        console.log('You will be redirected to main page as authorized user');
+      } else if (params.accessDenied) {
+        console.log('Please authorize in system');
+      }else if (params.sessionFiled){
+        console.log('Please enter the system again, your session expired');
       }
-    })
+    });
   }
 
   ngOnDestroy()  {
-    if(this.aSub){
-      this.aSub.unsubscribe()
+    if (this.aSub){
+      this.aSub.unsubscribe();
     }
   }
 
   onSubmit(){
     this.errorMessage = '';
-    this.form.disable()
-    this.aSub= this.auth.login(this.form.value).subscribe(
-      ()=>this.router.navigate(['/transactions']),
+    this.form.disable();
+    this.aSub = this.auth.login(this.form.value).subscribe(
+      () => this.router.navigate(['/transactions']),
       (error: HttpErrorResponse) => {
-        this.errorMessage = error.error
-        console.warn(error.error)
-        this.form.enable()
+        this.errorMessage = error.error;
+        console.warn(error.error);
+        this.form.enable();
       }
-    )
+    );
   }
 }

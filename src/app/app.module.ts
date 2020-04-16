@@ -19,7 +19,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatListModule} from '@angular/material/list';
-import { HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SiteheaderComponent } from './layouts/siteheader/siteheader.component';
 import { TokenInterceptor } from './shared/classes/token.interceptor';
 import { MatTableModule } from '@angular/material/table';
@@ -27,7 +27,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { TransactionsComponent } from './transactions/transactions/transactions.component';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { CreatetransactionComponent } from './transactions/createtransaction/createtransaction.component';
-//import { TransactionsService } from './transactions/transaction.service';
+// import { TransactionsService } from './transactions/transaction.service';
 
 @NgModule({
   declarations: [
