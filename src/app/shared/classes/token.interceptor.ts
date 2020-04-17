@@ -19,6 +19,14 @@ export class TokenInterceptor implements HttpInterceptor{
                 }
             });
         }
+        // if (request.url.startsWith('/')) {
+        //     const modifiedReq = request.clone({
+        //       url: environment.apiBaseUrl + request.url
+        //     });
+        //     return next.handle(modifiedReq);
+        //   } else {
+        //     return next.handle(request);
+        //   }
 
         return next.handle(request);
         // return next.handle(request).pipe(
