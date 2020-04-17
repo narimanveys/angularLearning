@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import {tap} from 'rxjs/operators';
 import { LoggedUserInfoService } from './loggeduserinfo.service';
-import { BaseUrls } from '../shared/classes/baseurls';
+import { $resource } from '../shared/classes/constants';
 
 @Injectable(
     {providedIn: 'root'}
@@ -18,7 +18,8 @@ export class AuthService{
     }
 
     login(user: User): Observable<{id_token: string}>{
-        return this.http.post<{id_token: string}>(BaseUrls.Host + BaseUrls.Login, user)
+        // tslint:disable-next-line:no-string-literal
+        return this.http.post<{id_token: string}>($resource['Login'](), user)
             .pipe(
                 tap(
                     ({id_token}) => {
@@ -31,7 +32,8 @@ export class AuthService{
     }
 
     register(registerUser: RegisterUser): Observable<{id_token: string}>{
-        return this.http.post<{id_token: string}>(BaseUrls.Host + BaseUrls.Register, registerUser)
+        // tslint:disable-next-line:no-string-literal
+        return this.http.post<{id_token: string}>($resource['Register'](), registerUser)
             .pipe(
                 tap(
                     ({id_token}) => {

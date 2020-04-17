@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { UserInfo } from '../shared/interfaces';
+import { $resource } from '../shared/classes/constants';
 
 @Injectable(
     {providedIn: 'root'}
@@ -15,9 +16,9 @@ export class LoggedUserInfoService {
     }
 
     getUserInfo(): Observable<UserInfo>{
-        return this.http.get<any>('http://193.124.114.46:3001/api/protected/user-info').pipe((map(x => x.user_info_token)));
+        // tslint:disable-next-line:no-string-literal
+        return this.http.get<any>($resource['UserInfo']()).pipe((map(x => x.user_info_token)));
     }
-
 
     handleUserAuthorize() {
           const currentUser: UserInfo = {id: 0, balance: 0, date: null, email: null, name: null} ;
