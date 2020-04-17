@@ -20,7 +20,7 @@
               <mat-error *ngIf="form.get('email').errors?.required">
                Email is required
               </mat-error>
-              <mat-error *ngIf="form.get('email').errors?.email">
+              <mat-error *ngIf="form.get('email').errors?.pattern">
                Email address is not correct
               </mat-error>
            </mat-form-field>
