@@ -16,7 +16,6 @@ export class LoggedUserInfoService {
     }
 
     getUserInfo(): Observable<UserInfo>{
-        // tslint:disable-next-line:no-string-literal
         return this.http.get<any>($resource['UserInfo']()).pipe((map(x => x.user_info_token)));
     }
 
@@ -27,7 +26,6 @@ export class LoggedUserInfoService {
           currentUser.email = user.email;
           currentUser.balance = user.balance;
           currentUser.id = user.id;
-          console.log('Current user:', currentUser);
           this.userInfoSubject.next(currentUser);
           sessionStorage.setItem('userData', JSON.stringify(currentUser));
         });

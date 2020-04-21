@@ -32,5 +32,4 @@ const init = () => {
 };
 
 init();
-// console.log(resource)
 export const $resource = resource;

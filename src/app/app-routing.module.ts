@@ -15,7 +15,6 @@ const routes: Routes = [
         { path: 'login', component: LoginComponent}
     ]},
     {path: '', component: SiteheaderComponent, canActivate: [AuthGuard], children: [
-        // {path: '',redirectTo: '/transactions', pathMatch: 'full'},
         {path: 'transactions', component: TransactionsComponent, pathMatch: 'full'},
         {path: 'create', component: CreatetransactionComponent, pathMatch: 'full'}
     ]}
@@ -23,7 +22,6 @@ const routes: Routes = [
 
 @NgModule({
     imports: [
-        // RouterModule.forRoot(routes,{enableTracing: true})
         RouterModule.forRoot(routes)
     ],
     exports: [

@@ -11,14 +11,12 @@ import { $resource } from '../shared/classes/constants';
 )
 
 export class AuthService{
-    // tslint:disable-next-line:variable-name
     private id_token = null;
     private bearer = 'Bearer ';
     constructor(private http: HttpClient, private userInfoService: LoggedUserInfoService){
     }
 
     login(user: User): Observable<{id_token: string}>{
-        // tslint:disable-next-line:no-string-literal
         return this.http.post<{id_token: string}>($resource['Login'](), user)
             .pipe(
                 tap(
@@ -32,7 +30,6 @@ export class AuthService{
     }
 
     register(registerUser: RegisterUser): Observable<{id_token: string}>{
-        // tslint:disable-next-line:no-string-literal
         return this.http.post<{id_token: string}>($resource['Register'](), registerUser)
             .pipe(
                 tap(

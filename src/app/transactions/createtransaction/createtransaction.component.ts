@@ -41,8 +41,6 @@ export class CreatetransactionComponent implements OnInit {
 
   constructor(private transactionService: TransactionsService, private loggedUserInfoService: LoggedUserInfoService,
               private activatedRoute: ActivatedRoute, private router: Router) {
-    console.log('FROM constructor');
-    console.log(this.activatedRoute.snapshot.queryParams.name);
   }
 
   onSubmit() {
@@ -52,15 +50,11 @@ export class CreatetransactionComponent implements OnInit {
       () => this.router.navigate(['/transactions']),
       (error: HttpErrorResponse) => {
         this.errorMessage = error.error;
-        console.warn(error.error);
         this.form.enable();
-        console.log('FROM Submit');
-        console.log(this.activatedRoute.snapshot.queryParams.name);
       }
     );
   }
 
   ngOnInit(): void {
-
   }
 }

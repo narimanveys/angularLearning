@@ -14,23 +14,17 @@ export class TransactionsService {
 
     }
 
-    // type trans_token
     fetch(): Observable<Transaction[]>{
-        // tslint:disable-next-line:no-string-literal
         return this.http.get<any>($resource['Transaction']()).pipe((map(x => x.trans_token)));
     }
 
     getUserList(filter: string) {
-        // tslint:disable-next-line:no-string-literal
         return this.http.post<SearchUser[]>($resource['UserList'](), {filter});
-        // tslint:disable-next-line:max-line-length
-        // return this.http.post<SearchUser[]>('http://193.124.114.46:3001/api/protected/users/list', {filter}).pipe(catchError(()=> of([])))
     }
 
     postTransaction(newTransaction: NewTransaction){
         return this.http.post<{ trans_token: TransactionCreationResult}>
-        // tslint:disable-next-line:no-string-literal
-        ($resource['Transaction'](), newTransaction)
+            ($resource['Transaction'](), newTransaction)
             .pipe((map(x => x.trans_token)))
             .pipe(
                 tap(

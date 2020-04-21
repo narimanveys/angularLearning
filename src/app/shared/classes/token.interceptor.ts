@@ -11,7 +11,6 @@ export class TokenInterceptor implements HttpInterceptor{
     }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>>{
-        console.log('intercept', this.auth.getToken());
         if (this.auth.isAuthenticated()){
             request = request.clone({
                 setHeaders: {
@@ -19,33 +18,6 @@ export class TokenInterceptor implements HttpInterceptor{
                 }
             });
         }
-        // if (request.url.startsWith('/')) {
-        //     const modifiedReq = request.clone({
-        //       url: environment.apiBaseUrl + request.url
-        //     });
-        //     return next.handle(modifiedReq);
-        //   } else {
-        //     return next.handle(request);
-        //   }
-
         return next.handle(request);
-        // return next.handle(request).pipe(
-        //     catchError(
-        //         (error: HttpErrorResponse)=> this.handleAuthError(error )
-        //     )
-        // )
     }
-
-    // private handleAuthError(error: HttpErrorResponse): Observable<any>{
-    //     console.log('interceptor', error)
-    //     if(error.status == 401){
-    //         this.router.navigate(['/login'],
-    //         {queryParams:{
-    //             sessionFailed: true
-    //         }
-    //      })
-    //     }
-    //     return throwError(error);
-    // }
-
 }
