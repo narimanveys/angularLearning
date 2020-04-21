@@ -19,7 +19,7 @@ export class TransactionsService {
     }
 
     getUserList(filter: string) {
-        return this.http.post<SearchUser[]>($resource['UserList'](), {filter});
+        return this.http.post<SearchUser[]>($resource['UsersList'](), {filter});
     }
 
     postTransaction(newTransaction: NewTransaction){
