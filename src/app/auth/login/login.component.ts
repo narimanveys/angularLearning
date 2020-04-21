@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/sevices/auth.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,7 @@ export class LoginComponent implements OnInit , OnDestroy{
   form: FormGroup;
   aSub: Subscription;
   errorMessage: string;
-  constructor(private auth: AuthService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private auth: AuthService, private router: Router, private route: ActivatedRoute, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -28,11 +29,11 @@ export class LoginComponent implements OnInit , OnDestroy{
     this.route.queryParams.subscribe((params: Params) => {
       this.errorMessage = '';
       if (params.registered){
-        console.log('You will be redirected to main page as authorized user');
-      } else if (params.accessDenied) {
-        console.log('Please authorize in system');
-      }else if (params.sessionFiled){
-        console.log('Please enter the system again, your session expired');
+        this.openSnackBar('You will be redirected to main page as authorized user');
+        } else if (params.accessDenied) {
+        this.openSnackBar('Please authorize in system');
+        }else if (params.sessionFiled){
+        this.openSnackBar('Please enter the system again, your session expired');
       }
     });
   }
@@ -50,9 +51,13 @@ export class LoginComponent implements OnInit , OnDestroy{
       () => this.router.navigate(['/transactions']),
       (error: HttpErrorResponse) => {
         this.errorMessage = error.error;
-        console.warn(error.error);
+        this.openSnackBar(this.errorMessage);
         this.form.enable();
       }
     );
+  }
+
+  openSnackBar(message){
+    this.snackBar.open(message, '', {duration : 2000});
   }
 }
